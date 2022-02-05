@@ -1,5 +1,5 @@
 import math
-from ..src.vector import Tuple, Colour, point, vector
+from ..src.raycaster.vector import Tuple, Colour, point, vector
 
 class TestTuple:
     def test_point(self):
@@ -106,6 +106,15 @@ class TestTuple:
         assert a.cross(b) == vector(-1, 2, -1)
         assert b.cross(a) == vector(1, -2, 1)
 
+    def test_repr(self):
+        p = point(1, 2, 3)
+        assert repr(p) == "point(x=1.00, y=2.00, z=3.00)"
+        v = vector(1, 2, 3)
+        assert repr(v) == "vector(x=1.00, y=2.00, z=3.00)"
+
+        p = point(0.1234567, 1234.8765, -10.5)
+        assert repr(p) == "point(x=0.12, y=1234.88, z=-10.50)"
+
 class TestColour:
     def test_add_colour(self):
         a = Colour(0.9, 0.6, 0.75)
@@ -125,3 +134,7 @@ class TestColour:
         a = Colour(1, 0.2, 0.4)
         b = Colour(0.9, 1, 0.1)
         assert a * b == Colour(0.9, 0.2, 0.04)
+
+    def test_repr(self):
+        c = Colour(0, 0.6, 0.7)
+        assert repr(c) == "Colour(r=0.00, g=0.60, b=0.70)"
