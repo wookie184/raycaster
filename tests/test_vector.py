@@ -1,5 +1,7 @@
 import math
-from ..src.raycaster.vector import Tuple, Colour, point, vector
+
+from ..src.raycaster.vector import Colour, Tuple, point, vector
+
 
 class TestTuple:
     def test_point(self):
@@ -90,7 +92,7 @@ class TestTuple:
     def test_normalize_float(self):
         a = vector(1, 2, 3)
         sqrt14 = math.sqrt(14)
-        assert a.normalize() == vector(1/sqrt14, 2/sqrt14, 3/sqrt14)
+        assert a.normalize() == vector(1 / sqrt14, 2 / sqrt14, 3 / sqrt14)
 
         assert a.normalize().magnitude() == 1
 
@@ -114,6 +116,7 @@ class TestTuple:
 
         p = point(0.1234567, 1234.8765, -10.5)
         assert repr(p) == "point(x=0.12, y=1234.88, z=-10.50)"
+
 
 class TestColour:
     def test_add_colour(self):

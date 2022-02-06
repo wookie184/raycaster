@@ -1,6 +1,15 @@
 import math
-from ..src.raycaster.transformation import rotation_x, rotation_y, rotation_z, shearing, translation, scaling
+
+from ..src.raycaster.transformation import (
+    rotation_x,
+    rotation_y,
+    rotation_z,
+    scaling,
+    shearing,
+    translation,
+)
 from ..src.raycaster.vector import point, vector
+
 
 class TestTransformations:
     def test_translate_point(self):
@@ -40,31 +49,31 @@ class TestTransformations:
 
     def test_rotation_x(self):
         p = point(0, 1, 0)
-        half_quarter = rotation_x(math.pi/4)
-        full_quarter = rotation_x(math.pi/2)
+        half_quarter = rotation_x(math.pi / 4)
+        full_quarter = rotation_x(math.pi / 2)
 
-        assert half_quarter * p == point(0, (2**0.5)/2, (2**0.5)/2)
+        assert half_quarter * p == point(0, (2**0.5) / 2, (2**0.5) / 2)
         assert full_quarter * p == point(0, 0, 1)
 
     def test_rotation_x_inverse(self):
         p = point(0, 1, 0)
-        half_quarter_inv = rotation_x(math.pi/4).inverse()
-        assert half_quarter_inv * p == point(0, (2**0.5)/2, -(2**0.5)/2)
+        half_quarter_inv = rotation_x(math.pi / 4).inverse()
+        assert half_quarter_inv * p == point(0, (2**0.5) / 2, -(2**0.5) / 2)
 
     def test_rotation_y(self):
         p = point(0, 0, 1)
-        half_quarter = rotation_y(math.pi/4)
-        full_quarter = rotation_y(math.pi/2)
+        half_quarter = rotation_y(math.pi / 4)
+        full_quarter = rotation_y(math.pi / 2)
 
-        assert half_quarter * p == point((2**0.5)/2, 0, (2**0.5)/2)
+        assert half_quarter * p == point((2**0.5) / 2, 0, (2**0.5) / 2)
         assert full_quarter * p == point(1, 0, 0)
 
     def test_rotation_z(self):
         p = point(0, 1, 0)
-        half_quarter = rotation_z(math.pi/4)
-        full_quarter = rotation_z(math.pi/2)
+        half_quarter = rotation_z(math.pi / 4)
+        full_quarter = rotation_z(math.pi / 2)
 
-        assert half_quarter * p == point(-(2**0.5)/2, (2**0.5)/2, 0)
+        assert half_quarter * p == point(-(2**0.5) / 2, (2**0.5) / 2, 0)
         assert full_quarter * p == point(-1, 0, 0)
 
     def test_shear_x_prop_y(self):
@@ -86,7 +95,7 @@ class TestTransformations:
         t = shearing(0, 0, 0, 1, 0, 0)
         p = point(2, 3, 4)
         assert t * p == point(2, 7, 4)
-    
+
     def test_shear_z_prop_x(self):
         t = shearing(0, 0, 0, 0, 1, 0)
         p = point(2, 3, 4)
@@ -99,7 +108,7 @@ class TestTransformations:
 
     def test_multiple_transformations(self):
         p = point(1, 0, 1)
-        a = rotation_x(math.pi/2)
+        a = rotation_x(math.pi / 2)
         b = scaling(5, 5, 5)
         c = translation(10, 5, 7)
 
@@ -114,7 +123,7 @@ class TestTransformations:
 
     def test_chained_transformations(self):
         p = point(1, 0, 1)
-        a = rotation_x(math.pi/2)
+        a = rotation_x(math.pi / 2)
         b = scaling(5, 5, 5)
         c = translation(10, 5, 7)
 

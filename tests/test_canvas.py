@@ -1,6 +1,8 @@
 import pytest
+
 from ..src.raycaster.canvas import Canvas
 from ..src.raycaster.vector import Colour
+
 
 class TestCanvas:
     def test_canvas(self):
@@ -11,7 +13,7 @@ class TestCanvas:
         c = Canvas(1000, 500)
         assert c.height == 500
         assert c.width == 1000
-    
+
     def test_read_write(self):
         c = Canvas(10, 40)
         col1 = Colour(0.5, 0.4, 0.3)
@@ -54,20 +56,10 @@ class TestCanvas:
     def test_ppm(self):
         c = Canvas(2, 1)
 
-        assert c.as_ppm_string() == (
-            "P3\n"
-            "2 1\n"
-            "255\n"
-            "0 0 0 0 0 0\n"
-        )
+        assert c.as_ppm_string() == "P3\n2 1\n255\n0 0 0 0 0 0\n"
 
         c.write(0, 0, Colour(-0.1, 0.456, 1.1))
-        assert c.as_ppm_string() == (
-            "P3\n"
-            "2 1\n"
-            "255\n"
-            "0 116 255 0 0 0\n"
-        )
+        assert c.as_ppm_string() == "P3\n2 1\n255\n0 116 255 0 0 0\n"
 
         c = Canvas(5, 3)
 
@@ -75,7 +67,7 @@ class TestCanvas:
         c.write(2, 1, Colour(0, 0.5, 0))
         c.write(4, 2, Colour(-0.5, 0.5, 1))
 
-        assert c.as_ppm_string().splitlines(True)[3:6] == [        
+        assert c.as_ppm_string().splitlines(True)[3:6] == [
             "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n",
             "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n",
             "0 0 0 0 0 0 0 0 0 0 0 0 0 128 255\n",

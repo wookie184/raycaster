@@ -13,9 +13,6 @@ coverage = "^6.0.0"
 poethepoet = "^0.12.0"
 pre-commit = "^2.17.0"
 
-[tool.isort]
-profile = "black"
-
 [tool.poe.tasks]
 test = "coverage run -m pytest"
 report = "coverage report -m; coverage html"

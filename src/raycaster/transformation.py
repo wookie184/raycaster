@@ -1,5 +1,7 @@
 import math
+
 from .matrix import Matrix
+
 
 def translation(x, y, z):
     mat = Matrix.identity()
@@ -8,12 +10,14 @@ def translation(x, y, z):
     mat[2, 3] = z
     return mat
 
+
 def scaling(x, y, z):
     mat = Matrix.identity()
     mat[0, 0] = x
     mat[1, 1] = y
     mat[2, 2] = z
     return mat
+
 
 def rotation_x(r):
     mat = Matrix.identity()
@@ -23,6 +27,7 @@ def rotation_x(r):
     mat[2, 2] = math.cos(r)
     return mat
 
+
 def rotation_y(r):
     mat = Matrix.identity()
     mat[0, 0] = math.cos(r)
@@ -31,6 +36,7 @@ def rotation_y(r):
     mat[2, 2] = math.cos(r)
     return mat
 
+
 def rotation_z(r):
     mat = Matrix.identity()
     mat[0, 0] = math.cos(r)
@@ -38,6 +44,7 @@ def rotation_z(r):
     mat[1, 0] = math.sin(r)
     mat[1, 1] = math.cos(r)
     return mat
+
 
 def shearing(xy, xz, yx, yz, zx, zy):
     mat = Matrix.identity()
@@ -48,4 +55,3 @@ def shearing(xy, xz, yx, yz, zx, zy):
     mat[2, 0] = zx
     mat[2, 1] = zy
     return mat
-

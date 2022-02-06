@@ -1,11 +1,13 @@
-from ..src.raycaster.vector import Tuple
 from ..src.raycaster.matrix import Matrix
+from ..src.raycaster.vector import Tuple
+
 
 class TestMatrix:
     def test_create(self):
-        m = Matrix([0]*16)
+        m = Matrix([0] * 16)
+        assert m.size == 4
 
-    def test_create_2x2(self):
+    def test_get_2x2(self):
         # fmt: off
         m = Matrix([
             -3,  5,
@@ -16,7 +18,7 @@ class TestMatrix:
         assert m[0, 1] == 5
         assert m[1, 0] == 1
         assert m[1, 1] == -2
-    
+
     def test_get_row(self):
         m = Matrix(range(16))
         assert m[0] == [0, 1, 2, 3]
@@ -26,8 +28,8 @@ class TestMatrix:
     def test_equality(self):
         a = Matrix(range(16))
         b = Matrix(range(16))
-        c = Matrix([0]*16)
-        d = Matrix([0]*9)
+        c = Matrix([0] * 16)
+        d = Matrix([0] * 9)
 
         assert a == b
         assert b != c
@@ -63,7 +65,7 @@ class TestMatrix:
         assert m[-1, :] == [12, 13, 14, 15]
 
     def test_set_row(self):
-        m = Matrix([0]*16)
+        m = Matrix([0] * 16)
 
         m[0] = [0, 1, 2, 3]
         assert m[0] == [0, 1, 2, 3]
@@ -73,7 +75,7 @@ class TestMatrix:
         assert m[-1] == [12, 13, 14, 15]
 
     def test_set_element(self):
-        m = Matrix([0]*16)
+        m = Matrix([0] * 16)
         m[0, 0] = 1
         assert m[0, 0] == 1
         m[2, 1] = 6
@@ -82,9 +84,9 @@ class TestMatrix:
         assert m[1, 2] == 9
         m[-1, -1] = 15
         assert m[-1, -1] == 15
-    
+
     def test_set_column(self):
-        m = Matrix([0]*16)
+        m = Matrix([0] * 16)
         m[:, 0] = [0, 4, 8, 12]
         assert m[:, 0] == [0, 4, 8, 12]
         m[:, 1] = [1, 5, 9, 13]
@@ -93,7 +95,7 @@ class TestMatrix:
         assert m[:, -1] == [3, 7, 11, 15]
 
     def test_set_row_slice(self):
-        m = Matrix([0]*16)
+        m = Matrix([0] * 16)
         m[0, :] = [0, 1, 2, 3]
         assert m[0, :] == [0, 1, 2, 3]
         m[1, :] = [4, 5, 6, 7]
@@ -105,8 +107,8 @@ class TestMatrix:
         # fmt: off
         a = Matrix([
             1, 2, 3, 4,
-            5, 6, 7, 8, 
-            9, 8, 7, 6, 
+            5, 6, 7, 8,
+            9, 8, 7, 6,
             5, 4, 3, 2,
         ])
         b = Matrix([
@@ -146,22 +148,22 @@ class TestMatrix:
         # fmt: on
         b = Matrix.identity()
         assert a * b == a
-        
-        c = Tuple(1,2,3,4)
+
+        c = Tuple(1, 2, 3, 4)
         assert b * c == c
 
     def test_transpose(self):
         # fmt: off
         a = Matrix([
-            0, 9, 3, 0, 
-            9, 8, 0, 8, 
-            1, 8, 5, 3, 
+            0, 9, 3, 0,
+            9, 8, 0, 8,
+            1, 8, 5, 3,
             0, 0, 5, 8,
         ])
         b = Matrix([
-            0, 9, 1, 0, 
-            9, 8, 8, 0, 
-            3, 0, 5, 5, 
+            0, 9, 1, 0,
+            9, 8, 8, 0,
+            3, 0, 5, 5,
             0, 8, 3, 8,
         ])
         # fmt: on
@@ -177,7 +179,7 @@ class TestMatrix:
              1, 5,
             -3, 2,
         ])
-        # fmt: off
+        # fmt: on
         assert a.determinant() == 17
 
     def test_submatrix(self):
@@ -222,8 +224,8 @@ class TestMatrix:
     def test_cofactor(self):
         # fmt: off
         a = Matrix([
-             3,  5,  0, 
-             2, -1, -7, 
+             3,  5,  0,
+             2, -1, -7,
              6, -1,  5,
         ])
         # fmt: on
@@ -237,8 +239,8 @@ class TestMatrix:
     def test_determinant_3x3(self):
         # fmt: off
         a = Matrix([
-             1,  2,  6, 
-            -5,  8, -4, 
+             1,  2,  6,
+            -5,  8, -4,
              2,  6,  4,
         ])
         # fmt: on
@@ -266,20 +268,20 @@ class TestMatrix:
     def test_invertability(self):
         # fmt: off
         a = Matrix([
-             6,  4,  4,  4, 
+             6,  4,  4,  4,
              5,  5,  7,  6,
-             4, -9,  3, -7, 
+             4, -9,  3, -7,
              9,  1,  7, -6,
         ])
         # fmt: on
         assert a.determinant() == -2120
         assert a.is_invertible()
-        
+
         # fmt: off
         b = Matrix([
             -4,  2, -2, -3,
              9,  6,  2,  6,
-             0, -5,  1, -5, 
+             0, -5,  1, -5,
              0,  0,  0,  0,
         ])
         # fmt: on
@@ -289,9 +291,9 @@ class TestMatrix:
     def test_inverse(self):
         # fmt: off
         a = Matrix([
-            -5,  2,  6, -8, 
-             1, -5,  1,  8, 
-             7,  7, -6, -7, 
+            -5,  2,  6, -8,
+             1, -5,  1,  8,
+             7,  7, -6, -7,
              1, -3,  7,  4,
         ])
         # fmt: on
@@ -300,14 +302,14 @@ class TestMatrix:
         assert a.determinant() == 532
 
         assert a.cofactor(2, 3) == -160
-        assert b[3, 2] == -160/532
+        assert b[3, 2] == -160 / 532
         assert a.cofactor(3, 2) == 105
-        assert b[2, 3] == 105/532
+        assert b[2, 3] == 105 / 532
 
         # fmt: off
         exp = Matrix([
              0.21805,  0.45113,  0.24060, -0.04511,
-            -0.80827, -1.45677, -0.44361,  0.52068, 
+            -0.80827, -1.45677, -0.44361,  0.52068,
             -0.07895, -0.22368, -0.05263,  0.19737,
             -0.52256, -0.81391, -0.30075,  0.30639,
         ])
@@ -319,8 +321,8 @@ class TestMatrix:
         # fmt: off
         a = Matrix([
              8, -5,  9,  2,
-             7,  5,  6,  1, 
-            -6,  0,  9,  6, 
+             7,  5,  6,  1,
+            -6,  0,  9,  6,
             -3,  0, -9, -4,
         ])
         exp = Matrix([
@@ -334,9 +336,9 @@ class TestMatrix:
 
         # fmt: off
         b = Matrix([
-             9,  3,  0,  9, 
-            -5, -2, -6, -3, 
-            -4,  9,  6,  4, 
+             9,  3,  0,  9,
+            -5, -2, -6, -3,
+            -4,  9,  6,  4,
             -7,  6,  6,  2,
         ])
         exp = Matrix([
@@ -351,17 +353,17 @@ class TestMatrix:
     def test_mul_inverse(self):
         # fmt: off
         a = Matrix([
-             3, -9,  7,  3, 
-             3, -8,  2, -9, 
-            -4,  4,  4,  1, 
+             3, -9,  7,  3,
+             3, -8,  2, -9,
+            -4,  4,  4,  1,
             -6,  5, -1,  1,
         ])
         b = Matrix([
              8,  2,  2,  2,
              3, -1,  7,  0,
-             7,  0,  5,  4, 
+             7,  0,  5,  4,
              6, -2,  0,  5,
-        ]) 
+        ])
         # fmt: on
         c = a * b
         assert c * b.inverse() == a
