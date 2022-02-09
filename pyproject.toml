@@ -24,9 +24,9 @@ format = "pre-commit run"
 precommit = "pre-commit install"
 
 [tool.coverage.run]
-source = ["src/raycaster"]
+source = ["raycaster"]
 
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core @ git+https://github.com/python-poetry/poetry-core.git@master"]
 build-backend = "poetry.core.masonry.api"

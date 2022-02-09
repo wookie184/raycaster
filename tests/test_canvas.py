@@ -1,7 +1,7 @@
 import pytest
 
-from ..src.raycaster.canvas import Canvas
-from ..src.raycaster.vector import Colour
+from raycaster.canvas import Canvas
+from raycaster.vector import Colour
 
 
 class TestCanvas:

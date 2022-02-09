@@ -1,5 +1,5 @@
-from ..src.raycaster.matrix import Matrix
-from ..src.raycaster.vector import Tuple
+from raycaster.matrix import Matrix
+from raycaster.vector import Tuple
 
 
 class TestMatrix:

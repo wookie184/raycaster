@@ -1,7 +1,7 @@
-from ..src.raycaster.matrix import Matrix
-from ..src.raycaster.ray import Intersection, Intersections, Ray, Sphere
-from ..src.raycaster.transformation import scaling, translation
-from ..src.raycaster.vector import point, vector
+from raycaster.matrix import Matrix
+from raycaster.ray import Intersection, Intersections, Ray, Sphere
+from raycaster.transformation import scaling, translation
+from raycaster.vector import point, vector
 
 
 class TestRay:

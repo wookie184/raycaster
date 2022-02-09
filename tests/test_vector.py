@@ -1,6 +1,6 @@
 import math
 
-from ..src.raycaster.vector import Colour, Tuple, point, vector
+from raycaster.vector import Colour, Tuple, point, vector
 
 
 class TestTuple:

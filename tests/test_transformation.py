@@ -1,6 +1,6 @@
 import math
 
-from ..src.raycaster.transformation import (
+from raycaster.transformation import (
     rotation_x,
     rotation_y,
     rotation_z,
@@ -8,7 +8,7 @@ from ..src.raycaster.transformation import (
     shearing,
     translation,
 )
-from ..src.raycaster.vector import point, vector
+from raycaster.vector import point, vector
 
 
 class TestTransformations:
