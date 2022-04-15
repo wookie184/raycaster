@@ -3,7 +3,7 @@ import math
 from .matrix import Matrix
 
 
-def translation(x, y, z):
+def translation(x: float, y: float, z: float) -> Matrix:
     mat = Matrix.identity()
     mat[0, 3] = x
     mat[1, 3] = y
@@ -11,7 +11,7 @@ def translation(x, y, z):
     return mat
 
 
-def scaling(x, y, z):
+def scaling(x: float, y: float, z: float) -> Matrix:
     mat = Matrix.identity()
     mat[0, 0] = x
     mat[1, 1] = y
@@ -19,7 +19,7 @@ def scaling(x, y, z):
     return mat
 
 
-def rotation_x(r):
+def rotation_x(r: float) -> Matrix:
     mat = Matrix.identity()
     mat[1, 1] = math.cos(r)
     mat[1, 2] = -math.sin(r)
@@ -28,7 +28,7 @@ def rotation_x(r):
     return mat
 
 
-def rotation_y(r):
+def rotation_y(r: float) -> Matrix:
     mat = Matrix.identity()
     mat[0, 0] = math.cos(r)
     mat[0, 2] = math.sin(r)
@@ -37,7 +37,7 @@ def rotation_y(r):
     return mat
 
 
-def rotation_z(r):
+def rotation_z(r: float) -> Matrix:
     mat = Matrix.identity()
     mat[0, 0] = math.cos(r)
     mat[0, 1] = -math.sin(r)
@@ -46,7 +46,9 @@ def rotation_z(r):
     return mat
 
 
-def shearing(xy, xz, yx, yz, zx, zy):
+def shearing(
+    xy: float, xz: float, yx: float, yz: float, zx: float, zy: float
+) -> Matrix:
     mat = Matrix.identity()
     mat[0, 1] = xy
     mat[0, 2] = xz

@@ -7,17 +7,17 @@ import numbers
 class Tuple:
     __slots__ = ("x", "y", "z", "w")
 
-    def __init__(self, x: float = 0, y: float = 0, z: float = 0, w: float = 0):
+    def __init__(self, x: float = 0, y: float = 0, z: float = 0, w: float = 0) -> None:
         self.x = float(x)
         self.y = float(y)
         self.z = float(z)
         self.w = float(w)
 
-    def is_point(self):
+    def is_point(self) -> bool:
         """Returns True if the tuple represents a point (self.w==1)."""
         return self.w == 1
 
-    def __add__(self, other):
+    def __add__(self, other: Tuple) -> Tuple:
         "Add the tuple's elements to another elementwise."
         if isinstance(other, self.__class__):
             return self.__class__(
@@ -28,10 +28,10 @@ class Tuple:
             )
         return NotImplemented
 
-    def __getitem__(self, i):
+    def __getitem__(self, i: int) -> float:
         return (self.x, self.y, self.z, self.w)[i]
 
-    def __sub__(self, other):
+    def __sub__(self, other: Tuple) -> Tuple:
         "Subtract another tuple's elements elementwise."
         if isinstance(other, self.__class__):
             return self.__class__(
@@ -42,7 +42,7 @@ class Tuple:
             )
         return NotImplemented
 
-    def __mul__(self, other):
+    def __mul__(self, other: float) -> Tuple:
         """Multiply the tuple's elements by a scalar."""
         if isinstance(other, numbers.Number):
             return self.__class__(
@@ -53,7 +53,7 @@ class Tuple:
             )
         return NotImplemented
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: float) -> Tuple:
         """Divide the tuple's elements by a scalar."""
         if isinstance(other, numbers.Number):
             return self.__class__(
@@ -64,15 +64,15 @@ class Tuple:
             )
         return NotImplemented
 
-    def __neg__(self):
+    def __neg__(self) -> Tuple:
         """Negate the tuple's elements."""
         return self.__class__(x=-self.x, y=-self.y, z=-self.z, w=-self.w)
 
-    def dot(self, other: Tuple):
+    def dot(self, other: Tuple) -> float:
         """Calculates the dot product of the tuple."""
         return self.x * other.x + self.y * other.y + self.z * other.z + self.w * other.w
 
-    def normalize(self):
+    def normalize(self) -> Tuple:
         """Normalizes a vector."""
         assert not self.is_point()
 
@@ -84,13 +84,13 @@ class Tuple:
             w=self.w / total,
         )
 
-    def magnitude(self):
+    def magnitude(self) -> float:
         """Calculates the magnitude of the vector."""
         assert not self.is_point()
 
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
-    def cross(self, other):
+    def cross(self, other: Tuple) -> Tuple:
         """Calculates the cross product of two vectors."""
         assert not self.is_point()
 
@@ -101,7 +101,7 @@ class Tuple:
             0,
         )
 
-    def is_close(self, other: Tuple, abs_tol=1e-5):
+    def is_close(self, other: Tuple, abs_tol: float = 1e-5) -> bool:
         return (
             all(
                 math.isclose(a1, a2, abs_tol=abs_tol)
@@ -110,19 +110,19 @@ class Tuple:
             and self.is_point() == other.is_point()
         )
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
             abs_tol = 1e-10
             return self.is_close(other, abs_tol)
 
         return NotImplemented
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         name = "point" if self.is_point() else "vector"
         return f"{name}(x={self.x:.2f}, y={self.y:.2f}, z={self.z:.2f})"
 
 
-def clamp(n, lo, hi):
+def clamp(n: float, lo: float, hi: float) -> float:
     return lo if n <= lo else hi if n >= hi else n
 
 
@@ -154,7 +154,7 @@ class Colour(Tuple):
             )
         return super().__mul__(other)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Colour(r={self.x:.2f}, g={self.y:.2f}, b={self.z:.2f})"
 
 

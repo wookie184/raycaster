@@ -3,11 +3,11 @@ from raycaster.vector import Tuple
 
 
 class TestMatrix:
-    def test_create(self):
+    def test_create(self) -> None:
         m = Matrix([0] * 16)
         assert m.size == 4
 
-    def test_get_2x2(self):
+    def test_get_2x2(self) -> None:
         # fmt: off
         m = Matrix([
             -3,  5,
@@ -19,13 +19,13 @@ class TestMatrix:
         assert m[1, 0] == 1
         assert m[1, 1] == -2
 
-    def test_get_row(self):
+    def test_get_row(self) -> None:
         m = Matrix(range(16))
         assert m[0] == [0, 1, 2, 3]
         assert m[1] == [4, 5, 6, 7]
         assert m[-1] == [12, 13, 14, 15]
 
-    def test_equality(self):
+    def test_equality(self) -> None:
         a = Matrix(range(16))
         b = Matrix(range(16))
         c = Matrix([0] * 16)
@@ -40,31 +40,31 @@ class TestMatrix:
         b[-1, -1] = 1
         assert a == b
 
-    def test_equality_float(self):
+    def test_equality_float(self) -> None:
         a = Matrix([0, 100, 1e-50, 0])
         b = Matrix([0, 100 + 1e-10, 0, 0])
         assert a == b
 
-    def test_get_col(self):
+    def test_get_col(self) -> None:
         m = Matrix(range(16))
         assert m[:, 0] == [0, 4, 8, 12]
         assert m[:, 1] == [1, 5, 9, 13]
         assert m[:, -1] == [3, 7, 11, 15]
 
-    def test_get_elem(self):
+    def test_get_elem(self) -> None:
         m = Matrix(range(16))
         assert m[0, 0] == 0
         assert m[2, 1] == 9
         assert m[1, 2] == 6
         assert m[-1, -1] == 15
 
-    def test_get_row_slice(self):
+    def test_get_row_slice(self) -> None:
         m = Matrix(range(16))
         assert m[0, :] == [0, 1, 2, 3]
         assert m[1, :] == [4, 5, 6, 7]
         assert m[-1, :] == [12, 13, 14, 15]
 
-    def test_set_row(self):
+    def test_set_row(self) -> None:
         m = Matrix([0] * 16)
 
         m[0] = [0, 1, 2, 3]
@@ -74,7 +74,7 @@ class TestMatrix:
         m[-1] = [12, 13, 14, 15]
         assert m[-1] == [12, 13, 14, 15]
 
-    def test_set_element(self):
+    def test_set_element(self) -> None:
         m = Matrix([0] * 16)
         m[0, 0] = 1
         assert m[0, 0] == 1
@@ -85,7 +85,7 @@ class TestMatrix:
         m[-1, -1] = 15
         assert m[-1, -1] == 15
 
-    def test_set_column(self):
+    def test_set_column(self) -> None:
         m = Matrix([0] * 16)
         m[:, 0] = [0, 4, 8, 12]
         assert m[:, 0] == [0, 4, 8, 12]
@@ -94,7 +94,7 @@ class TestMatrix:
         m[:, -1] = [3, 7, 11, 15]
         assert m[:, -1] == [3, 7, 11, 15]
 
-    def test_set_row_slice(self):
+    def test_set_row_slice(self) -> None:
         m = Matrix([0] * 16)
         m[0, :] = [0, 1, 2, 3]
         assert m[0, :] == [0, 1, 2, 3]
@@ -103,7 +103,7 @@ class TestMatrix:
         m[-1, :] = [12, 13, 14, 15]
         assert m[-1, :] == [12, 13, 14, 15]
 
-    def test_multiply_self(self):
+    def test_multiply_self(self) -> None:
         # fmt: off
         a = Matrix([
             1, 2, 3, 4,
@@ -125,7 +125,7 @@ class TestMatrix:
         ])
         # fmt: on
 
-    def test_multiply_tuple(self):
+    def test_multiply_tuple(self) -> None:
         # fmt: off
         a = Matrix([
             1, 2, 3, 4,
@@ -137,7 +137,7 @@ class TestMatrix:
         b = Tuple(1, 2, 3, 1)
         assert a * b == Tuple(18, 24, 33, 1)
 
-    def test_multiply_identity(self):
+    def test_multiply_identity(self) -> None:
         # fmt: off
         a = Matrix([
             0,  1,  2,  4,
@@ -152,7 +152,7 @@ class TestMatrix:
         c = Tuple(1, 2, 3, 4)
         assert b * c == c
 
-    def test_transpose(self):
+    def test_transpose(self) -> None:
         # fmt: off
         a = Matrix([
             0, 9, 3, 0,
@@ -170,10 +170,10 @@ class TestMatrix:
 
         assert a.transpose() == b
 
-    def test_transpose_identity(self):
+    def test_transpose_identity(self) -> None:
         assert Matrix.identity().transpose() == Matrix.identity()
 
-    def test_determinant_2x2(self):
+    def test_determinant_2x2(self) -> None:
         # fmt: off
         a = Matrix([
              1, 5,
@@ -182,7 +182,7 @@ class TestMatrix:
         # fmt: on
         assert a.determinant() == 17
 
-    def test_submatrix(self):
+    def test_submatrix(self) -> None:
         # fmt: off
         a = Matrix([
              1,  5,  0,
@@ -208,7 +208,7 @@ class TestMatrix:
         ])
         # fmt: on
 
-    def test_minor(self):
+    def test_minor(self) -> None:
         # fmt: off
         a = Matrix([
              3,  5,  0,
@@ -221,7 +221,7 @@ class TestMatrix:
         assert b.determinant() == 25
         assert a.minor(1, 0) == 25
 
-    def test_cofactor(self):
+    def test_cofactor(self) -> None:
         # fmt: off
         a = Matrix([
              3,  5,  0,
@@ -236,7 +236,7 @@ class TestMatrix:
         assert a.minor(1, 0) == 25
         assert a.cofactor(1, 0) == -25
 
-    def test_determinant_3x3(self):
+    def test_determinant_3x3(self) -> None:
         # fmt: off
         a = Matrix([
              1,  2,  6,
@@ -250,7 +250,7 @@ class TestMatrix:
         assert a.cofactor(0, 2) == -46
         assert a.determinant() == -196
 
-    def test_determinant_4x4(self):
+    def test_determinant_4x4(self) -> None:
         # fmt: off
         a = Matrix([
             -2, -8,  3,  5,
@@ -265,7 +265,7 @@ class TestMatrix:
         assert a.cofactor(0, 3) == 51
         assert a.determinant() == -4071
 
-    def test_invertability(self):
+    def test_invertability(self) -> None:
         # fmt: off
         a = Matrix([
              6,  4,  4,  4,
@@ -288,7 +288,7 @@ class TestMatrix:
         assert b.determinant() == 0
         assert not b.is_invertible()
 
-    def test_inverse(self):
+    def test_inverse(self) -> None:
         # fmt: off
         a = Matrix([
             -5,  2,  6, -8,
@@ -317,7 +317,7 @@ class TestMatrix:
         assert b.is_close(exp)
         assert not a.is_close(exp)
 
-    def test_more_inverse(self):
+    def test_more_inverse(self) -> None:
         # fmt: off
         a = Matrix([
              8, -5,  9,  2,
@@ -350,7 +350,7 @@ class TestMatrix:
         # fmt: on
         assert b.inverse().is_close(exp)
 
-    def test_mul_inverse(self):
+    def test_mul_inverse(self) -> None:
         # fmt: off
         a = Matrix([
              3, -9,  7,  3,
@@ -368,7 +368,7 @@ class TestMatrix:
         c = a * b
         assert c * b.inverse() == a
 
-    def test_repr(self):
+    def test_repr(self) -> None:
         m = Matrix(range(16))
         assert repr(m) == (
             "[0.00   1.00   2.00   3.00   \n"

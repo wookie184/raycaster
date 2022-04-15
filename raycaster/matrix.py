@@ -1,10 +1,13 @@
+from __future__ import annotations
+
 import math
+from typing import Iterable
 
 from .vector import Tuple
 
 
 class Matrix:
-    def __init__(self, data):
+    def __init__(self, data: Iterable[float]):
         self.data = [float(el) for el in data]
         self.size = int(len(self.data) ** 0.5)
 
@@ -52,7 +55,7 @@ class Matrix:
                 ] = val
         return ValueError("Cannot understand that setitem format")
 
-    def __mul__(self, other):
+    def __mul__(self, other: Tuple | Matrix) -> Tuple | Matrix:
         if isinstance(other, self.__class__):
             assert self.size == other.size == 4
             new_data = []
@@ -69,16 +72,16 @@ class Matrix:
             )
         raise NotImplementedError
 
-    def transpose(self):
+    def transpose(self) -> Matrix:
         return self.__class__(el for row in zip(*self[:]) for el in row)
 
-    def determinant(self):
+    def determinant(self) -> int:
         if self.size == 2:
             return self[0, 0] * self[1, 1] - self[0, 1] * self[1, 0]
 
         return sum(self.cofactor(0, pos) * el for pos, el in enumerate(self[0]))
 
-    def submatrix(self, row, column):
+    def submatrix(self, row: int, column: int) -> Matrix:
         return self.__class__(
             [
                 el
@@ -87,16 +90,16 @@ class Matrix:
             ]
         )
 
-    def minor(self, row, column):
+    def minor(self, row: int, column: int) -> int:
         return self.submatrix(row, column).determinant()
 
-    def cofactor(self, row, column):
+    def cofactor(self, row: int, column: int) -> int:
         return self.minor(row, column) * (1 if (row + column) % 2 == 0 else -1)
 
-    def is_invertible(self):
+    def is_invertible(self) -> bool:
         return self.determinant() != 0
 
-    def inverse(self):
+    def inverse(self) -> Matrix:
         new_data = []
         det = self.determinant()
         for row in range(self.size):
@@ -105,7 +108,7 @@ class Matrix:
                 new_data.append(c / det)
         return self.__class__(new_data).transpose()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         res = []
         for i, el in enumerate(self.data):
             if i % self.size == 0:
@@ -113,12 +116,12 @@ class Matrix:
             res.append(f"{el:<7.2f}")
         return "[" + "".join(res).strip() + "]"
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if isinstance(other, self.__class__):
             return self.is_close(other, abs_tol=1e-10)
         return NotImplemented
 
-    def is_close(self, other, abs_tol=1e-5):
+    def is_close(self, other: Matrix, abs_tol: float = 1e-5) -> bool:
         if self.size != other.size:
             return False
         return all(
@@ -126,7 +129,7 @@ class Matrix:
         )
 
     @classmethod
-    def identity(cls):
+    def identity(cls) -> Matrix:
         # fmt: off
         return cls([
             1, 0, 0, 0,

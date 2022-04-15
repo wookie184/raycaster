@@ -19,7 +19,7 @@ class Environment(NamedTuple):
     wind: Tuple
 
 
-def main():
+def main() -> None:
     proj = Projectile(
         position=point(0, 1, 0), velocity=vector(1, 1, 0).normalize() * 1.3
     )

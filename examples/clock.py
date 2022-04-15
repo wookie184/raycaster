@@ -9,7 +9,7 @@ FILE_DIR = Path(__file__).parent.parent / "renders"
 FILE_DIR.mkdir(exist_ok=True)
 
 
-def main():
+def main() -> None:
     c = Canvas(500, 500)
     top = point(0, 1, 0) * 200
     for rot in range(12):

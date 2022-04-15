@@ -5,7 +5,7 @@ from raycaster.vector import Colour
 
 
 class TestCanvas:
-    def test_canvas(self):
+    def test_canvas(self) -> None:
         c = Canvas(40, 10)
         assert c.height == 10
         assert c.width == 40
@@ -14,7 +14,7 @@ class TestCanvas:
         assert c.height == 500
         assert c.width == 1000
 
-    def test_read_write(self):
+    def test_read_write(self) -> None:
         c = Canvas(10, 40)
         col1 = Colour(0.5, 0.4, 0.3)
         c.write(2, 5, col1)
@@ -30,7 +30,7 @@ class TestCanvas:
         assert c.get(0, 0) == col2
         assert c.get(9, 39) == col2
 
-    def test_out_of_bounds_read(self):
+    def test_out_of_bounds_read(self) -> None:
         c = Canvas(10, 10)
         with pytest.raises(IndexError):
             c.get(0, 10)
@@ -39,9 +39,9 @@ class TestCanvas:
             c.get(-1, 0)
 
         with pytest.raises(TypeError):
-            c.get(0.5, 0)
+            c.get(0.5, 0)  # type: ignore
 
-    def test_out_of_bounds_write(self):
+    def test_out_of_bounds_write(self) -> None:
         c = Canvas(10, 10)
         col = Colour(0, 0, 0)
         with pytest.raises(IndexError):
@@ -51,9 +51,9 @@ class TestCanvas:
             c.write(0, -1, col)
 
         with pytest.raises(TypeError):
-            c.write(0, 0.5, col)
+            c.write(0, 0.5, col)  # type: ignore
 
-    def test_ppm(self):
+    def test_ppm(self) -> None:
         c = Canvas(2, 1)
 
         assert c.as_ppm_string() == "P3\n2 1\n255\n0 0 0 0 0 0\n"

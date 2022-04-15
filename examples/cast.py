@@ -9,7 +9,7 @@ FILE_DIR = Path(__file__).parent.parent / "renders"
 FILE_DIR.mkdir(exist_ok=True)
 
 
-def main():
+def main() -> None:
     size = 500
     print("Creating canvas...")
     c = Canvas(size, size)
