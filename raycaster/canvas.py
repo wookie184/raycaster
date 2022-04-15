@@ -4,7 +4,7 @@ from typing import Generator
 from .vector import Colour
 
 
-def chunk(seq: list[str], n: int) -> Generator[list[str]]:
+def chunk(seq: list[str], n: int) -> Generator[list[str], None, None]:
     for i in range(0, len(seq), n):
         yield seq[i : i + n]
 
