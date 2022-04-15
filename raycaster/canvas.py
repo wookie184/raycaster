@@ -25,7 +25,7 @@ class Canvas:
         return self.pixels[y][x]
 
     def as_ppm_string(self):
-        header = "P3\n" f"{self.width} {self.height}\n" "255\n"
+        header = f"P3\n{self.width} {self.height}\n255\n"
         body = "\n".join(
             "\n".join(
                 " ".join(line)
