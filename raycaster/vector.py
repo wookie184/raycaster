@@ -101,15 +101,20 @@ class Tuple:
             0,
         )
 
-    def __eq__(self, other):
-        abs_tol = 1e-10
-        if isinstance(other, self.__class__):
-            return (
-                math.isclose(self.x, other.x, abs_tol=abs_tol)
-                and math.isclose(self.y, other.y, abs_tol=abs_tol)
-                and math.isclose(self.z, other.z, abs_tol=abs_tol)
-                and self.is_point() == other.is_point()
+    def is_close(self, other: Tuple, abs_tol=1e-5):
+        return (
+            all(
+                math.isclose(a1, a2, abs_tol=abs_tol)
+                for a1, a2 in zip((self.x, self.y, self.z), (other.x, other.y, other.z))
             )
+            and self.is_point() == other.is_point()
+        )
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            abs_tol = 1e-10
+            return self.is_close(other, abs_tol)
+
         return NotImplemented
 
     def __repr__(self):

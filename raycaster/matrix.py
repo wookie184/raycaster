@@ -119,7 +119,6 @@ class Matrix:
         return NotImplemented
 
     def is_close(self, other, abs_tol=1e-5):
-        print(list(zip(self.data, other.data)))
         if self.size != other.size:
             return False
         return all(

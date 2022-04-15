@@ -32,6 +32,21 @@ class TestTuple:
         assert d != b
         assert d != c
 
+        # Should allow if very close (e.g. by floating point innacuracy)
+        e = Tuple(1.5550000001, 2, 3.2, 0.0)
+        assert a == e
+
+    def test_is_close(self):
+        a = Tuple(1.234556, 2, 3.2, 0.0)
+        b = Tuple(1.23456, 2, 3.2, 0.0)
+        c = Tuple(1.234, 2.1, 3.2, 0.0)
+
+        assert a.is_close(b)
+        assert b.is_close(a)
+
+        assert not a.is_close(c)
+        assert not c.is_close(a)
+
     def test_add(self):
         a = Tuple(3, -2, 5, 1)
         b = Tuple(-2, 3, 1, 0)
