@@ -41,6 +41,13 @@ class Sphere:
     def set_transform(self, t: Matrix):
         self.transform = t
 
+    def normal_at(self, world_point: Tuple):
+        object_point = self.transform.inverse() * world_point
+        object_normal = object_point - point(0, 0, 0)
+        world_normal = self.transform.inverse().transpose() * object_normal
+        world_normal.w = 0
+        return world_normal.normalize()
+
 
 class Intersection:  # noqa: SIM119
     def __init__(self, t, obj):
